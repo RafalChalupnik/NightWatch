@@ -13,6 +13,13 @@ struct ContentView: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text("Nightly Tasks")
+                    Text("Check all windows")
+                    Text("Check all doors")
+                    Text("Check that the safe is locked")
+                    Text("Check the mailbox")
+                    Text("Inspect security cameras")
+                    Text("Clear ice from sidewalks")
+                    Text("Document \"strange and unusual\" occurences")
                     Text("Weekly Tasks")
                     Text("Monthly Tasks")
                 }
