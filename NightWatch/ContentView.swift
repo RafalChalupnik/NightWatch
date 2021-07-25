@@ -10,9 +10,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("Nightly Tasks")
-            Text("Weekly Tasks")
-            Text("Monthly Tasks")
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Nightly Tasks")
+                    Text("Weekly Tasks")
+                    Text("Monthly Tasks")
+                }
+                Spacer()
+            }
+            Spacer()
         }
     }
 }
