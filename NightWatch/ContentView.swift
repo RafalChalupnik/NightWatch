@@ -17,11 +17,32 @@ let nightlyTasks = [
     "Document \"strange and unusual\" occurences"
 ]
 
+let weeklyTasks = [
+    "Check inside all vacant rooms",
+    "Walk the perimiter of property"
+]
+
+let monthlyTasks = [
+    "Test security alarm",
+    "Test motion detectors",
+    "Test smoke alarms"
+]
+
 struct ContentView: View {
     var body: some View {
-        List(nightlyTasks, id: \.self, rowContent: {
-            taskName in Text(taskName)
-        })
+        List {
+            ForEach(nightlyTasks, id: \.self, content: {
+                taskName in Text(taskName)
+            })
+            
+            ForEach(weeklyTasks, id: \.self, content: {
+                taskName in Text(taskName)
+            })
+            
+            ForEach(monthlyTasks, id: \.self, content: {
+                taskName in Text(taskName)
+            })
+        }
     }
 }
 
