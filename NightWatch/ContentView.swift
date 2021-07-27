@@ -32,38 +32,39 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
         List {
-            Section(header: HStack {
-                Image(systemName: "moon.stars")
-                Text("Nightly Tasks")
-            }
-            .font(.title3)) {
+            Section(header: TaskSectionHeader(symbolSystemName: "moon.stars", headerText: "Nightly Tasks")) {
                 ForEach(nightlyTasks, id: \.self, content: {
-                    taskName in NavigationLink(taskName, destination: Text(taskName))
+                    taskName in NavigationLink(taskName, destination: DetailsView(taskName: taskName))
                 })
             }
             
-            Section(header: HStack {
-                Image(systemName: "sunset")
-                Text("Weekly Tasks")
-            }
-            .font(.title3)) {
+            Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks")) {
                 ForEach(weeklyTasks, id: \.self, content: {
-                    taskName in NavigationLink(taskName, destination: Text(taskName))
+                    taskName in NavigationLink(taskName, destination: DetailsView(taskName: taskName))
                 })
             }
             
-            Section(header: HStack {
-                Image(systemName: "calendar")
-                Text("Monthly Tasks")
-            }
-            .font(.title3)) {
+            Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks")) {
                 ForEach(monthlyTasks, id: \.self, content: {
-                    taskName in NavigationLink(taskName, destination: Text(taskName))
+                    taskName in NavigationLink(taskName, destination: DetailsView(taskName: taskName))
                 })
             }}
             .listStyle(GroupedListStyle())
             .navigationTitle("Home")
         }
+    }
+}
+
+struct TaskSectionHeader: View {
+    let symbolSystemName: String
+    let headerText: String
+    
+    var body: some View {
+        HStack {
+            Image(systemName: symbolSystemName)
+            Text(headerText)
+        }
+        .font(.title3)
     }
 }
 

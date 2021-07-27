@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9731BCAF26B072FE004E792D /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9731BCAE26B072FE004E792D /* DetailsView.swift */; };
 		9760B24C26AC53A50006D0E4 /* NightWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9760B24B26AC53A50006D0E4 /* NightWatchApp.swift */; };
 		9760B24E26AC53A50006D0E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9760B24D26AC53A50006D0E4 /* ContentView.swift */; };
 		9760B25026AC53A60006D0E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9760B24F26AC53A60006D0E4 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9731BCAE26B072FE004E792D /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		9760B24826AC53A50006D0E4 /* NightWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NightWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9760B24B26AC53A50006D0E4 /* NightWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightWatchApp.swift; sourceTree = "<group>"; };
 		9760B24D26AC53A50006D0E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 				9760B24F26AC53A60006D0E4 /* Assets.xcassets */,
 				9760B25426AC53A60006D0E4 /* Info.plist */,
 				9760B25126AC53A60006D0E4 /* Preview Content */,
+				9731BCAE26B072FE004E792D /* DetailsView.swift */,
 			);
 			path = NightWatch;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				9760B24E26AC53A50006D0E4 /* ContentView.swift in Sources */,
 				9760B24C26AC53A50006D0E4 /* NightWatchApp.swift in Sources */,
+				9731BCAF26B072FE004E792D /* DetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
