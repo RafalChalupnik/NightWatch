@@ -31,18 +31,36 @@ let monthlyTasks = [
 struct ContentView: View {
     var body: some View {
         List {
-            ForEach(nightlyTasks, id: \.self, content: {
-                taskName in Text(taskName)
-            })
+            Section(header: HStack {
+                Image(systemName: "moon.stars")
+                Text("Nightly Tasks")
+            }
+            .font(.title3)) {
+                ForEach(nightlyTasks, id: \.self, content: {
+                    taskName in Text(taskName)
+                })
+            }
             
-            ForEach(weeklyTasks, id: \.self, content: {
-                taskName in Text(taskName)
-            })
+            Section(header: HStack {
+                Image(systemName: "sunset")
+                Text("Weekly Tasks")
+            }
+            .font(.title3)) {
+                ForEach(weeklyTasks, id: \.self, content: {
+                    taskName in Text(taskName)
+                })
+            }
             
-            ForEach(monthlyTasks, id: \.self, content: {
-                taskName in Text(taskName)
-            })
-        }
+            Section(header: HStack {
+                Image(systemName: "calendar")
+                Text("Monthly Tasks")
+            }
+            .font(.title3)) {
+                ForEach(monthlyTasks, id: \.self, content: {
+                    taskName in Text(taskName)
+                })
+            }
+        }.listStyle(GroupedListStyle())
     }
 }
 
