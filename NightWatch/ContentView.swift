@@ -30,6 +30,7 @@ let monthlyTasks = [
 
 struct ContentView: View {
     var body: some View {
+        NavigationView {
         List {
             Section(header: HStack {
                 Image(systemName: "moon.stars")
@@ -37,7 +38,7 @@ struct ContentView: View {
             }
             .font(.title3)) {
                 ForEach(nightlyTasks, id: \.self, content: {
-                    taskName in Text(taskName)
+                    taskName in NavigationLink(taskName, destination: Text(taskName))
                 })
             }
             
@@ -47,7 +48,7 @@ struct ContentView: View {
             }
             .font(.title3)) {
                 ForEach(weeklyTasks, id: \.self, content: {
-                    taskName in Text(taskName)
+                    taskName in NavigationLink(taskName, destination: Text(taskName))
                 })
             }
             
@@ -57,10 +58,12 @@ struct ContentView: View {
             }
             .font(.title3)) {
                 ForEach(monthlyTasks, id: \.self, content: {
-                    taskName in Text(taskName)
+                    taskName in NavigationLink(taskName, destination: Text(taskName))
                 })
-            }
-        }.listStyle(GroupedListStyle())
+            }}
+            .listStyle(GroupedListStyle())
+            .navigationTitle("Home")
+        }
     }
 }
 
