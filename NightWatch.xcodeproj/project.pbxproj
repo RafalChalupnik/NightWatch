@@ -13,6 +13,7 @@
 		9760B24E26AC53A50006D0E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9760B24D26AC53A50006D0E4 /* ContentView.swift */; };
 		9760B25026AC53A60006D0E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9760B24F26AC53A60006D0E4 /* Assets.xcassets */; };
 		9760B25326AC53A60006D0E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9760B25226AC53A60006D0E4 /* Preview Assets.xcassets */; };
+		97718AD326B5AAAC004F0BA0 /* NightWatchTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97718AD226B5AAAC004F0BA0 /* NightWatchTasks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9760B24F26AC53A60006D0E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9760B25226AC53A60006D0E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9760B25426AC53A60006D0E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97718AD226B5AAAC004F0BA0 /* NightWatchTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightWatchTasks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +60,12 @@
 			children = (
 				9760B24B26AC53A50006D0E4 /* NightWatchApp.swift */,
 				9760B24D26AC53A50006D0E4 /* ContentView.swift */,
+				9731BCAE26B072FE004E792D /* DetailsView.swift */,
+				9731BCB026B0763A004E792D /* Task.swift */,
+				97718AD226B5AAAC004F0BA0 /* NightWatchTasks.swift */,
 				9760B24F26AC53A60006D0E4 /* Assets.xcassets */,
 				9760B25426AC53A60006D0E4 /* Info.plist */,
 				9760B25126AC53A60006D0E4 /* Preview Content */,
-				9731BCAE26B072FE004E792D /* DetailsView.swift */,
-				9731BCB026B0763A004E792D /* Task.swift */,
 			);
 			path = NightWatch;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				9760B24E26AC53A50006D0E4 /* ContentView.swift in Sources */,
 				9760B24C26AC53A50006D0E4 /* NightWatchApp.swift in Sources */,
 				9731BCAF26B072FE004E792D /* DetailsView.swift in Sources */,
+				97718AD326B5AAAC004F0BA0 /* NightWatchTasks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
