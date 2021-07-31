@@ -12,36 +12,69 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-        List {
-            Section(header: TaskSectionHeader(symbolSystemName: "moon.stars", headerText: "Nightly Tasks")) {
-                ForEach(nightWatchTasks.nightlyTasks, content: {
-                    task in NavigationLink(
-                        destination: DetailsView(task: task),
-                        label: {
-                            TaskRow(task: task)
-                        })
-                })
+            List {
+                Section(header: TaskSectionHeader(symbolSystemName: "moon.stars", headerText: "Nightly Tasks")) {
+                    
+                    let taskIndices = nightWatchTasks.nightlyTasks.indices
+                    let tasks = nightWatchTasks.nightlyTasks
+                    let taskIndexPairs = Array(zip(tasks, taskIndices))
+                    
+                    ForEach(taskIndexPairs, id:\.0.id, content: {
+                        task, taskIndex in
+                        
+                        let nightWatchTasksWrapper = $nightWatchTasks
+                        let tasksBinding = nightWatchTasksWrapper.nightlyTasks
+                        let theTaskBinding = tasksBinding[taskIndex]
+                        
+                        NavigationLink(
+                            destination: DetailsView(task: theTaskBinding),
+                            label: {
+                                TaskRow(task: task)
+                            })
+                    })
+                }
+                
+                Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks")) {
+                    let taskIndices = nightWatchTasks.weeklyTasks.indices
+                    let tasks = nightWatchTasks.weeklyTasks
+                    let taskIndexPairs = Array(zip(tasks, taskIndices))
+                    
+                    ForEach(taskIndexPairs, id:\.0.id, content: {
+                        task, taskIndex in
+                        
+                        let nightWatchTasksWrapper = $nightWatchTasks
+                        let tasksBinding = nightWatchTasksWrapper.weeklyTasks
+                        let theTaskBinding = tasksBinding[taskIndex]
+                        
+                        NavigationLink(
+                            destination: DetailsView(task: theTaskBinding),
+                            label: {
+                                TaskRow(task: task)
+                            })
+                    })
+                }
+
+                Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks")) {
+                    let taskIndices = nightWatchTasks.monthlyTasks.indices
+                    let tasks = nightWatchTasks.monthlyTasks
+                    let taskIndexPairs = Array(zip(tasks, taskIndices))
+                    
+                    ForEach(taskIndexPairs, id:\.0.id, content: {
+                        task, taskIndex in
+                        
+                        let nightWatchTasksWrapper = $nightWatchTasks
+                        let tasksBinding = nightWatchTasksWrapper.monthlyTasks
+                        let theTaskBinding = tasksBinding[taskIndex]
+                        
+                        NavigationLink(
+                            destination: DetailsView(task: theTaskBinding),
+                            label: {
+                                TaskRow(task: task)
+                            })
+                    })
+                }
+                
             }
-            
-            Section(header: TaskSectionHeader(symbolSystemName: "sunset", headerText: "Weekly Tasks")) {
-                ForEach(nightWatchTasks.nightlyTasks, content: {
-                    task in NavigationLink(
-                        destination: DetailsView(task: task),
-                        label: {
-                            TaskRow(task: task)
-                        })
-                })
-            }
-            
-            Section(header: TaskSectionHeader(symbolSystemName: "calendar", headerText: "Monthly Tasks")) {
-                ForEach(nightWatchTasks.nightlyTasks, content: {
-                    task in NavigationLink(
-                        destination: DetailsView(task: task),
-                        label: {
-                            TaskRow(task: task)
-                        })
-                })
-            }}
             .listStyle(GroupedListStyle())
             .navigationTitle("Home")
         }
