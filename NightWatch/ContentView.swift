@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var nightWatchTasks: NightWatchTasks
     @State private var focusModeOn = false
+    @State private var resetAlertShowing = false
     
     var body: some View {
         NavigationView {
@@ -108,10 +109,7 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Reset") {
-                        let refreshedNightWatchTasks = NightWatchTasks()
-                        self.nightWatchTasks.nightlyTasks = refreshedNightWatchTasks.nightlyTasks
-                        self.nightWatchTasks.weeklyTasks = refreshedNightWatchTasks.weeklyTasks
-                        self.nightWatchTasks.monthlyTasks = refreshedNightWatchTasks.monthlyTasks
+                        self.resetAlertShowing = true
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {
@@ -121,6 +119,14 @@ struct ContentView: View {
                 }
             })
         }
+        .alert(isPresented: $resetAlertShowing, content: {
+            Alert(title: Text("Reset List"), message: Text("Are you sure?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Yes, reset it"), action: {
+                let refreshedNightWatchTasks = NightWatchTasks()
+                self.nightWatchTasks.nightlyTasks = refreshedNightWatchTasks.nightlyTasks
+                self.nightWatchTasks.weeklyTasks = refreshedNightWatchTasks.weeklyTasks
+                self.nightWatchTasks.monthlyTasks = refreshedNightWatchTasks.monthlyTasks
+            }))
+        })
     }
 }
 
