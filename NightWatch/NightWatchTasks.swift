@@ -8,7 +8,7 @@
 import Foundation
 
 class NightWatchTasks : ObservableObject {
-    @Published var nightlyTasks = [
+    let originalNightlyTasks = [
         Task(name: "Check all windows", isComplete: false, lastComplete: nil),
         Task(name: "Check all doors", isComplete: false, lastComplete: nil),
         Task(name: "Check that the safe is locked", isComplete: false, lastComplete: nil),
@@ -17,15 +17,33 @@ class NightWatchTasks : ObservableObject {
         Task(name: "Clear ice from sidewalks", isComplete: false, lastComplete: nil),
         Task(name: "Document \"strange and unusual\" occurences", isComplete: false, lastComplete: nil)
     ]
-
-    @Published var weeklyTasks = [
+    
+    let originalWeeklyTasks = [
         Task(name: "Check inside all vacant rooms", isComplete: false, lastComplete: nil),
         Task(name: "Walk the perimiter of property", isComplete: false, lastComplete: nil)
     ]
-
-    @Published var monthlyTasks = [
+    
+    let originalMonthlyTasks = [
         Task(name: "Test security alarm", isComplete: false, lastComplete: nil),
         Task(name: "Test motion detectors", isComplete: false, lastComplete: nil),
         Task(name: "Test smoke alarms", isComplete: false, lastComplete: nil)
     ]
+    
+    @Published var nightlyTasks: [Task]
+
+    @Published var weeklyTasks: [Task]
+
+    @Published var monthlyTasks: [Task]
+    
+    init() {
+        nightlyTasks = originalNightlyTasks
+        weeklyTasks = originalWeeklyTasks
+        monthlyTasks = originalMonthlyTasks
+    }
+    
+    func reset() -> Void {
+        nightlyTasks = originalNightlyTasks
+        weeklyTasks = originalWeeklyTasks
+        monthlyTasks = originalMonthlyTasks
+    }
 }

@@ -9,17 +9,31 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var nightWatchTasks: NightWatchTasks
-    @State private var focusModeOn = false
     @State private var resetAlertShowing = false
+    
+    var body: some View {
+        TaskList(tasks: nightWatchTasks, resetAlertShowing: $resetAlertShowing)
+            .alert(isPresented: $resetAlertShowing, content: {
+                Alert(title: Text("Reset List"), message: Text("Are you sure?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Yes, reset it"), action: {
+                    nightWatchTasks.reset()
+                }))
+            })
+    }
+}
+
+struct TaskList: View {
+    @ObservedObject var tasks: NightWatchTasks
+    @Binding var resetAlertShowing: Bool
+    @State var focusModeOn = false
     
     var body: some View {
         NavigationView {
             List {
-                TaskListSection(headerImageSystemName: "moon.stars", headerText: "Nightly Tasks", tasks: $nightWatchTasks.nightlyTasks, focusModeOn: $focusModeOn)
+                TaskListSection(headerImageSystemName: "moon.stars", headerText: "Nightly Tasks", tasks: $tasks.nightlyTasks, focusModeOn: $focusModeOn)
                 
-                TaskListSection(headerImageSystemName: "sunset", headerText: "Weekly Tasks", tasks: $nightWatchTasks.weeklyTasks, focusModeOn: $focusModeOn)
+                TaskListSection(headerImageSystemName: "sunset", headerText: "Weekly Tasks", tasks: $tasks.weeklyTasks, focusModeOn: $focusModeOn)
                 
-                TaskListSection(headerImageSystemName: "calendar", headerText: "Monthly Tasks", tasks: $nightWatchTasks.monthlyTasks, focusModeOn: $focusModeOn)
+                TaskListSection(headerImageSystemName: "calendar", headerText: "Monthly Tasks", tasks: $tasks.monthlyTasks, focusModeOn: $focusModeOn)
             }
             .listStyle(GroupedListStyle())
             .navigationTitle("Home")
@@ -29,7 +43,7 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Reset") {
-                        self.resetAlertShowing = true
+                        resetAlertShowing = true
                     }
                 }
                 ToolbarItem(placement: .bottomBar) {
@@ -37,16 +51,44 @@ struct ContentView: View {
                         Text("Focus Mode")
                     })
                 }
+        })
+        }
+    }
+}
+
+struct TaskListSection: View {
+    let headerImageSystemName: String
+    let headerText: String
+    @Binding var tasks: [Task]
+    @Binding var focusModeOn: Bool
+    
+    var body: some View {
+        Section(header: TaskSectionHeader(symbolSystemName: headerImageSystemName, headerText: headerText)) {
+            
+            let taskIndices = tasks.indices
+            let taskIndexPairs = Array(zip(tasks, taskIndices))
+            
+            ForEach(taskIndexPairs, id:\.0.id, content: {
+                task, taskIndex in
+                
+                let tasksBinding = $tasks
+                let theTaskBinding = tasksBinding[taskIndex]
+                
+                if (focusModeOn == false || (focusModeOn && task.isComplete == false)) {
+                    NavigationLink(
+                        destination: DetailsView(task: theTaskBinding),
+                        label: {
+                            TaskRow(task: task)
+                        })
+                }
+            })
+            .onDelete(perform: { indexSet in
+                tasks.remove(atOffsets: indexSet)
+            })
+            .onMove(perform: { indices, newOffset in
+                tasks.move(fromOffsets: indices, toOffset: newOffset)
             })
         }
-        .alert(isPresented: $resetAlertShowing, content: {
-            Alert(title: Text("Reset List"), message: Text("Are you sure?"), primaryButton: .cancel(), secondaryButton: .destructive(Text("Yes, reset it"), action: {
-                let refreshedNightWatchTasks = NightWatchTasks()
-                self.nightWatchTasks.nightlyTasks = refreshedNightWatchTasks.nightlyTasks
-                self.nightWatchTasks.weeklyTasks = refreshedNightWatchTasks.weeklyTasks
-                self.nightWatchTasks.monthlyTasks = refreshedNightWatchTasks.monthlyTasks
-            }))
-        })
     }
 }
 
@@ -89,41 +131,5 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let nightWatchTasks = NightWatchTasks()
         ContentView(nightWatchTasks: nightWatchTasks)
-    }
-}
-
-struct TaskListSection: View {
-    let headerImageSystemName: String
-    let headerText: String
-    @Binding var tasks: [Task]
-    @Binding var focusModeOn: Bool
-    
-    var body: some View {
-        Section(header: TaskSectionHeader(symbolSystemName: headerImageSystemName, headerText: headerText)) {
-            
-            let taskIndices = tasks.indices
-            let taskIndexPairs = Array(zip(tasks, taskIndices))
-            
-            ForEach(taskIndexPairs, id:\.0.id, content: {
-                task, taskIndex in
-                
-                let tasksBinding = $tasks
-                let theTaskBinding = tasksBinding[taskIndex]
-                
-                if (focusModeOn == false || (focusModeOn && task.isComplete == false)) {
-                    NavigationLink(
-                        destination: DetailsView(task: theTaskBinding),
-                        label: {
-                            TaskRow(task: task)
-                        })
-                }
-            })
-            .onDelete(perform: { indexSet in
-                tasks.remove(atOffsets: indexSet)
-            })
-            .onMove(perform: { indices, newOffset in
-                tasks.move(fromOffsets: indices, toOffset: newOffset)
-            })
-        }
     }
 }
